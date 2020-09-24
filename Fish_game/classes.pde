@@ -231,8 +231,8 @@ class food {
   }
   void grabbed(){
     if ((mousePressed) && (grabbed == true)){
-      x = mouseX + 60;
-      y = mouseY + 50;
+      x = mouseX;
+      y = mouseY;
     }
     else{
       grabbed = false;

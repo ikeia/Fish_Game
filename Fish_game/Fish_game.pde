@@ -55,11 +55,11 @@ void draw(){
   }
   if (mousePressed){
     hand_open = false;
-    cursor(closed,0,0);
+    cursor(MOVE);
   }
   else{
     hand_open = true;
-    cursor(open,0,0);
+    cursor(HAND);
   }
   for (Ball ball : balls) {
     ball.move();
