@@ -7,5 +7,5 @@ Random bubbles in the background. Fish moves around(screen is wrapped). Any key 
 How to play:
 
 - Have the latest version of processing
-- Put the PubNub4321 folder in your sketchbook/libraries or the library in your main processing folder but not both
+- Put the PubNub4321 folder in libraries in the main processing folder
 - Open one of the PDE files and press play
