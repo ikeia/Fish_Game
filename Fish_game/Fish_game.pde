@@ -133,9 +133,13 @@ void draw(){
   
 }
 
+void keyPressed(){
+  sendMessage();
+  //for (int i = 0; i < fish_food.length; i++) {
+  //  if (fish_food[i] == null){fish_food[i] = new food(mouseX, mouseY, 40, i, fish_food);break;}
+  //}
+}
+
 void keyReleased(){
   sendMessage();
-  for (int i = 0; i < fish_food.length; i++) {
-    if (fish_food[i] == null){fish_food[i] = new food(mouseX, mouseY, 40, i, fish_food);break;}
-  }
 }

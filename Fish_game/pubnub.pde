@@ -221,8 +221,8 @@ SubscribeCallback readIncoming = new SubscribeCallback()
   //print(food);
   if (food){
    for (int i = 0; i < fish_food.length; i++) {
-    if (fish_food[i] == null){fish_food[i] = new food(xCoordinate, yCoordinate, 40, i, fish_food);food = false;break;}
-  }
+    if (fish_food[i] == null){fish_food[i] = new food(xCoordinate, yCoordinate, 40, i, fish_food);allReceivedMessages.clear();break;}
+      }
   }
   
   
