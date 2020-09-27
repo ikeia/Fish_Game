@@ -125,8 +125,8 @@ import java.util.List;
 
 
 String publishChannel = "example1";
-String pubKey = "pub-c-f4f689cd-7936-4cf0-9cd1-46f8070a6e79";
-String subKey = "sub-c-5691f306-e64b-11ea-89a6-b2966c0cfe96";
+String pubKey = "pub-c-5d9ef26b-915f-4047-adba-adc30e198eec";
+String subKey = "sub-c-05d7c55a-fc83-11ea-81c8-6616e216ad91";
 String myID = "player10";
 
 
@@ -139,6 +139,7 @@ PubNub pubnub;
 JSONObject sendMessage = new JSONObject();
 String messageKey1 = "x";
 String messageKey2 = "y";
+String messageKey3 = "food";
 
 
 
@@ -215,11 +216,16 @@ void handleMessageData(PNMessageResult thisMessage)
   String sender = thisMessage.getPublisher();
   int xCoordinate =  thisMessage.getMessage().getAsJsonObject().get(messageKey1).getAsInt();
   int yCoordinate =  thisMessage.getMessage().getAsJsonObject().get(messageKey2).getAsInt();
+  boolean food = thisMessage.getMessage().getAsJsonObject().get(messageKey3).getAsBoolean();
+  
+   for (int i = 0; i < fish_food.length; i++) {
+    if (fish_food[i] == null){fish_food[i] = new food(xCoordinate, yCoordinate, 40, i, fish_food);break;}
+  }
   
   
   
-  fill(255,0,0);
-  ellipse(xCoordinate,yCoordinate,20,20);
+  //fill(255,0,0);
+  //ellipse(xCoordinate,yCoordinate,20,20);
   
   
   
@@ -240,6 +246,7 @@ void sendMessage()
  
  pnMessage.addProperty(messageKey1, mouseX);
  pnMessage.addProperty(messageKey2, mouseY);
+ pnMessage.addProperty(messageKey3, mousePressed);
  
  pubnub.publish()                                  //publish the message
     .message(pnMessage)

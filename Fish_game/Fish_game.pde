@@ -26,12 +26,12 @@ fish[] fishes = new fish[numfish];
 fish f1;
 //fish_1 = loadImage("1_3.png");
 
-//connectToPubNub();
 //ArrayList<bubble> bubbles = new ArrayList<bubble>();
 
 //bubble b1;
 
 void setup(){
+  connectToPubNub();
   imageMode(CENTER);
   fish_pic = loadImage("fish1.png");
   mouth_fish = loadImage("mouth fish.png");
