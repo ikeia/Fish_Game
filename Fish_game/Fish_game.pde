@@ -60,8 +60,13 @@ void setup(){
 
 
 void draw(){
-  //background(53,87,174, 0.1);
   background(150,160,210);
+  for(int i =0;i<allReceivedMessages.size();i++)
+  {
+    handleMessageData(allReceivedMessages.get(i));
+    
+  }
+  //background(53,87,174, 0.1);
   //if (fish_food.length == 0){
   //  food_exsists = false;
   //}
@@ -129,6 +134,7 @@ void draw(){
 }
 
 void keyReleased(){
+  sendMessage();
   for (int i = 0; i < fish_food.length; i++) {
     if (fish_food[i] == null){fish_food[i] = new food(mouseX, mouseY, 40, i, fish_food);break;}
   }

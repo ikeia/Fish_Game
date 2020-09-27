@@ -123,11 +123,13 @@ import okio.*;
 import java.util.Arrays;
 import java.util.List;
 
+//import org.slf4j.impl.StaticLoggerBinder;
 
-String publishChannel = "example1";
-String pubKey = "pub-c-5d9ef26b-915f-4047-adba-adc30e198eec";
-String subKey = "sub-c-05d7c55a-fc83-11ea-81c8-6616e216ad91";
-String myID = "player10";
+
+String publishChannel = "Food";
+String pubKey = "pub-c-0df1aec4-4620-4f0b-af08-11a8c38d69c7";
+String subKey = "sub-c-c008e100-00ef-11eb-81c8-6616e216ad91";
+String myID = "player0";
 
 
 
@@ -207,8 +209,7 @@ SubscribeCallback readIncoming = new SubscribeCallback()
 
 
 //function that handles the incoming
-void handleMessageData(PNMessageResult thisMessage)
-{
+ void handleMessageData(PNMessageResult thisMessage){
   
   //https://www.javadoc.io/doc/com.google.code.gson/gson/2.6.2/com/google/gson/JsonPrimitive.html
   
@@ -217,20 +218,21 @@ void handleMessageData(PNMessageResult thisMessage)
   int xCoordinate =  thisMessage.getMessage().getAsJsonObject().get(messageKey1).getAsInt();
   int yCoordinate =  thisMessage.getMessage().getAsJsonObject().get(messageKey2).getAsInt();
   boolean food = thisMessage.getMessage().getAsJsonObject().get(messageKey3).getAsBoolean();
+  print(food);
   
-   for (int i = 0; i < fish_food.length; i++) {
-    if (fish_food[i] == null){fish_food[i] = new food(xCoordinate, yCoordinate, 40, i, fish_food);break;}
-  }
-  
-  
-  
-  //fill(255,0,0);
-  //ellipse(xCoordinate,yCoordinate,20,20);
+  // for (int i = 0; i < fish_food.length; i++) {
+  //  if (fish_food[i] == null){fish_food[i] = new food(xCoordinate, yCoordinate, 40, i, fish_food);break;}
+  //}
   
   
   
+  fill(255,0,0);
+  ellipse(xCoordinate,yCoordinate,20,20);
   
-}
+  
+  
+  
+      }
 
 
 
@@ -246,7 +248,7 @@ void sendMessage()
  
  pnMessage.addProperty(messageKey1, mouseX);
  pnMessage.addProperty(messageKey2, mouseY);
- pnMessage.addProperty(messageKey3, mousePressed);
+ pnMessage.addProperty(messageKey3, keyPressed);
  
  pubnub.publish()                                  //publish the message
     .message(pnMessage)
