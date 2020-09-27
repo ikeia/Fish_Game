@@ -27,6 +27,7 @@ class fish {
   float targetY;
   PImage follow;
   PImage swim;
+  float sizemult = 1;
   
   food closest_food;
   float closest_dist;
@@ -44,6 +45,15 @@ class fish {
     
     }
   void collide(){
+        if (mousePressed) {
+      float dxs = mouseX - x_pos;
+      float dys = mouseY - y_pos;
+      float distances = sqrt(dxs*dxs + dys*dys);
+      float minDists = 1 + diameter/10;
+      if (distances < minDists) {
+        picked_up = true;
+        }
+      }
         for (int i = id + 1; i < neighbors.length; i++) {
       float dx = neighbors[i].x_pos - x_pos;
       float dy = neighbors[i].y_pos - y_pos;
@@ -118,6 +128,8 @@ class fish {
          
         if (distance < minDist){
           others[i] = null;
+          sizemult += 0.05;
+          //diameter *= sizemult;
           for (int f = 0; f < numfish; f++) {
             fishes[f].following = false; food_exsists = false;
                 }
@@ -172,6 +184,8 @@ class fish {
   //fish is grabbed
   void grabbed() {
     if (mousePressed) {
+      targetX = mouseX;
+      targetY = mouseY;
       x_pos = mouseX;
       y_pos = mouseY;
     } 
@@ -199,11 +213,11 @@ class fish {
     }
     
     if (following){
-      image(follow, 0, 0, im_width, im_height);
+      image(follow, 0, 0, im_width*sizemult, im_height*sizemult);
     }
     
     else{
-    image(swim, 0, 0, im_width, im_height);
+    image(swim, 0, 0, im_width*sizemult, im_height*sizemult);
     }
     //fill(255,0,0);
     //ellipse(0, 0, diameter, diameter);

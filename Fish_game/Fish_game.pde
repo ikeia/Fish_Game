@@ -51,7 +51,7 @@ void setup(){
  // fill(255, 204);
   
   for (int i = 0; i < numfish; i++) {
-    fishes[i] = new fish(random(0,width),random(0,height),random(50,400),i,fish_food,mouth_fish,fish_pic, fishes);
+    fishes[i] = new fish(random(0,width),random(0,height),155,i,fish_food,mouth_fish,fish_pic, fishes);
   }
  
   //fishes[0] = new fish(random(0,width),random(0,height),100,1,fish_food,mouth_fish,fish_pic);
@@ -101,9 +101,12 @@ void draw(){
        //if (food_exsists){
        //  fishes[i].following = true;
        //  }
-       if (fishes[i].following){
+       if (fishes[i].picked_up){
+         fishes[i].grabbed();
+       }
+       else if (fishes[i].following){
           //fishes[i].follow();
-          fishes[i].follow();
+          //fishes[i].follow();
           }
        else{
        // fishes[i].swim();
@@ -114,7 +117,7 @@ void draw(){
   
       //fishes[i].move();
       //fishes[i].display();
-      
+      fishes[i].follow();
       fishes[i].move();
       fishes[i].display();
     }
@@ -142,4 +145,8 @@ void keyPressed(){
 
 void keyReleased(){
   sendMessage();
+}
+
+void mousePressed(){
+  
 }
