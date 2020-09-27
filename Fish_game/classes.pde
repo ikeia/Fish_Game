@@ -61,6 +61,19 @@ class fish {
         neighbors[i].y_pos += ay;
       }
     }
+    if (fish_food != null){
+    for (int i = 0; i < fish_food.length; i++) {
+      if (others[i] != null){
+      float dx = others[i].x - x_pos;
+      float dy = others[i].y - y_pos;
+      float distance = sqrt(dx*dx + dy*dy);
+      float minDist = others[i].diameter/2 + diameter*2;
+      if (distance < minDist) { 
+        following = true;
+       }
+      }
+     }
+    }
   }
   void move() {
     dx = targetX - x_pos;

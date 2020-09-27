@@ -51,7 +51,7 @@ void setup(){
  // fill(255, 204);
   
   for (int i = 0; i < numfish; i++) {
-    fishes[i] = new fish(random(0,width),random(0,height),random(50,200),i,fish_food,mouth_fish,fish_pic, fishes);
+    fishes[i] = new fish(random(0,width),random(0,height),random(50,400),i,fish_food,mouth_fish,fish_pic, fishes);
   }
  
   //fishes[0] = new fish(random(0,width),random(0,height),100,1,fish_food,mouth_fish,fish_pic);
@@ -98,9 +98,9 @@ void draw(){
   for (int i = 0; i < fishes.length; i++) {
     if (fishes[i] != null){
        fishes[i].collide();
-       if (food_exsists){
-         fishes[i].following = true;
-         }
+       //if (food_exsists){
+       //  fishes[i].following = true;
+       //  }
        if (fishes[i].following){
           //fishes[i].follow();
           fishes[i].follow();
