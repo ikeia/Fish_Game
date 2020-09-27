@@ -9,13 +9,15 @@ class fish {
   float speed = 10;
   int id;
   food[] others;
+  fish[] neighbors;
+  
   boolean picked_up = false;
-  float easing = 0.003;
-  float s_ease = 0.003;
-  float f_ease = 0.015;
+  float s_ease = random(0.0005,0.01);
+  float easing = s_ease;
+  float f_ease = random(0.005,0.02);
 
-  float im_width = 200;
-  float im_height = 100;
+  float im_width = random(170,200);
+  float im_height = random(70,100);
   float dx;
   float dy;
   float x_speed = random(20, 30);
@@ -24,18 +26,22 @@ class fish {
   float targetX;
   float targetY;
   PImage follow;
+  PImage swim;
   
   food closest_food;
   float closest_dist;
 
   //initializes the fish
-  fish(float x, float y, float din, int idin, food[] oin, PImage F) {
+  fish(float x, float y, float din, int idin, food[] oin, PImage F, PImage S, fish[] fi) {
     x = x_pos;
     y = y_pos;
     diameter = din;
     id = idin;
     others = oin;
     follow = F;
+    swim = S;
+    neighbors = fi;
+    
     }
     
   void move() {
@@ -67,6 +73,9 @@ class fish {
 
   //fish is following
   void follow() {
+    closest_food = null;
+    closest_dist = 9999;
+    
     float distance;
     for (int i = 0; i < fish_food.length; i++) {
       if (others[i] != null){
@@ -78,8 +87,9 @@ class fish {
          
         if (distance < minDist){
           others[i] = null;
-          following = false;
-          food_exsists = false;
+          for (int f = 0; f < numfish; f++) {
+            fishes[f].following = false; food_exsists = false;
+                }
         }
         
         else if (i==0){
@@ -91,6 +101,11 @@ class fish {
         closest_dist = distance;
         }
        }
+       
+      else{
+        
+      }
+      
      }
        
        
@@ -107,9 +122,9 @@ class fish {
     float dxs = mouseX - x_pos;
     float dys = mouseY - y_pos;
     float distances = sqrt(dxs*dxs + dys*dys);
-    float minDists = diameter*3 + diameter/2;
+    float minDists = 1 + diameter/2;
     if (distances < minDists) {
-      easing = 0.015;
+      easing = f_ease * 2;
     }
 
     if (dx < 0) {
@@ -157,9 +172,10 @@ class fish {
     }
     
     else{
-    image(fish_pic, 0, 0, im_width, im_height);
+    image(swim, 0, 0, im_width, im_height);
     }
-    
+    //fill(255,0,0);
+    //ellipse(0, 0, diameter, diameter);
     popMatrix();
   }
 }
@@ -206,13 +222,9 @@ class Ball {
 
   void display() {
     //rotate(PI);
+    noStroke();
     fill(red, green, blue, alpha);
     ellipse(x, y, diameter, diameter);
-  }
-  void update() {
-    //collide();
-    move();
-    display();
   }
 }
 
@@ -241,7 +253,7 @@ class food {
       float dxs = mouseX - x;
       float dys = mouseY - y;
       float distances = sqrt(dxs*dxs + dys*dys);
-      float minDists = diameter*3 + diameter/2;
+      float minDists = 1 + diameter/2;
       if (distances < minDists) {
         grabbed = true;
       }
@@ -314,6 +326,7 @@ class food {
   void display() {
     food_exsists = true;
     fill(220, 170, 120);
+    stroke(2);
     ellipse(x, y, diameter, diameter);
   }
 }
