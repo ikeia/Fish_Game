@@ -218,16 +218,17 @@ SubscribeCallback readIncoming = new SubscribeCallback()
   int xCoordinate =  thisMessage.getMessage().getAsJsonObject().get(messageKey1).getAsInt();
   int yCoordinate =  thisMessage.getMessage().getAsJsonObject().get(messageKey2).getAsInt();
   boolean food = thisMessage.getMessage().getAsJsonObject().get(messageKey3).getAsBoolean();
-  print(food);
+  //print(food);
+  if (food){
+   for (int i = 0; i < fish_food.length; i++) {
+    if (fish_food[i] == null){fish_food[i] = new food(xCoordinate, yCoordinate, 40, i, fish_food);food = false;break;}
+  }
+  }
   
-  // for (int i = 0; i < fish_food.length; i++) {
-  //  if (fish_food[i] == null){fish_food[i] = new food(xCoordinate, yCoordinate, 40, i, fish_food);break;}
-  //}
   
   
-  
-  fill(255,0,0);
-  ellipse(xCoordinate,yCoordinate,20,20);
+  //fill(255,0,0);
+  //ellipse(xCoordinate,yCoordinate,20,20);
   
   
   
