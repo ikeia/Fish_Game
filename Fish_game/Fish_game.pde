@@ -92,6 +92,7 @@ void draw(){
   
   for (int i = 0; i < fishes.length; i++) {
     if (fishes[i] != null){
+       fishes[i].collide();
        if (food_exsists){
          fishes[i].following = true;
          }
@@ -101,6 +102,7 @@ void draw(){
           }
        else{
        // fishes[i].swim();
+        
         fishes[i].swim();
           }
   

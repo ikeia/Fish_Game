@@ -43,7 +43,25 @@ class fish {
     neighbors = fi;
     
     }
-    
+  void collide(){
+        for (int i = id + 1; i < neighbors.length; i++) {
+      float dx = neighbors[i].x_pos - x_pos;
+      float dy = neighbors[i].y_pos - y_pos;
+      float distance = sqrt(dx*dx + dy*dy);
+      float minDist = neighbors[i].diameter/2 + diameter/2;
+      if (distance < minDist) { 
+        float angle = atan2(dy, dx);
+        float targetX = x_pos + cos(angle) * minDist;
+        float targetY = y_pos + sin(angle) * minDist;
+        float ax = (targetX - neighbors[i].x_pos);
+        float ay = (targetY - neighbors[i].y_pos);
+        vx -= ax;
+        vy -= ay;
+        neighbors[i].x_pos += ax;
+        neighbors[i].y_pos += ay;
+      }
+    }
+  }
   void move() {
     dx = targetX - x_pos;
     x_pos += dx * easing;
