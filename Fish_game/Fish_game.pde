@@ -15,7 +15,7 @@ boolean hand_open = true;
 
 int numfood = 100;
 
-int numfish = 10;
+int numfish = 60;
 
 boolean food_exsists = false;
 
@@ -52,7 +52,7 @@ void setup(){
  // noStroke();
  // fill(255, 204);
   
-  for (int i = 0; i < numfish; i++) {
+  for (int i = 0; i < 10; i++) {
     fishes[i] = new fish(random(0,width),random(0,height),155,i,fish_food,mouth_fish,fish_pic, fishes);
   }
  

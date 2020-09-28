@@ -28,14 +28,14 @@ class fish {
   PImage follow;
   PImage swim;
   float sizemult = 1;
-  
+ 
   food closest_food;
   float closest_dist;
 
   //initializes the fish
   fish(float x, float y, float din, int idin, food[] oin, PImage F, PImage S, fish[] fi) {
-    x = x_pos;
-    y = y_pos;
+    x_pos = x;
+    y_pos = y;
     diameter = din;
     id = idin;
     others = oin;
@@ -55,6 +55,7 @@ class fish {
         }
       }
         for (int i = id + 1; i < neighbors.length; i++) {
+          if (neighbors[i] != null){
       float dx = neighbors[i].x_pos - x_pos;
       float dy = neighbors[i].y_pos - y_pos;
       float distance = sqrt(dx*dx + dy*dy);
@@ -70,6 +71,7 @@ class fish {
         neighbors[i].x_pos += ax;
         neighbors[i].y_pos += ay;
       }
+     }
     }
     if (fish_food != null){
     for (int i = 0; i < fish_food.length; i++) {
@@ -132,13 +134,15 @@ class fish {
           if (sizemult >=  2.5){
             sizemult = 1;
             for (int ii = 0; ii < fishes.length; ii++) {
-                  if (fishes[ii] == null){fishes[ii] = fishes[ii] = new fish(x_pos,y_pos,155,i,fish_food,mouth_fish,fish_pic, fishes);break;}
-      }
+                  if (fishes[ii] == null){fishes[ii] = fishes[ii] = new fish(x_pos,y_pos,155,ii,fish_food,mouth_fish,fish_pic, fishes);break;}
+                  }
           }
           //diameter *= sizemult;
           for (int f = 0; f < numfish; f++) {
+            if (fishes[f] != null){
             fishes[f].following = false; food_exsists = false;
-                }
+            }
+           }
         }
         
         else if (i==0){
