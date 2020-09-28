@@ -19,7 +19,11 @@ int numfish = 60;
 
 boolean food_exsists = false;
 
-food foo1;
+String instructions_1 = "Press any key to feed fish";
+String instructions_2 = "Click and drag mouse to move things around";
+
+instruct t1;
+instruct t2;
 
 food[] fish_food = new food[numfood];
 Ball[] balls = new Ball[balls_back];
@@ -49,6 +53,9 @@ void setup(){
     balls2[i] = new Ball(random(width), random(height), random(15, 70), i, balls2);
   }
   
+  t1 = new instruct(width/2-300,0,instructions_1,color(0,0,0,200));
+  t2 = new instruct(width/2-300,-100,instructions_2,color(0,0,0,200));
+  
  // noStroke();
  // fill(255, 204);
   
@@ -68,10 +75,6 @@ void draw(){
     handleMessageData(allReceivedMessages.get(i));
     
   }
-  //background(53,87,174, 0.1);
-  //if (fish_food.length == 0){
-  //  food_exsists = false;
-  //}
   
   if (fish_food != null){
   for (int i = 0; i < fish_food.length; i++) {
@@ -96,6 +99,9 @@ void draw(){
     ball.move();
     ball.display();
   }
+  
+  t1.update();
+  t2.update();
   
   for (int i = 0; i < fishes.length; i++) {
     if (fishes[i] != null){

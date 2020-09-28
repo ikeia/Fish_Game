@@ -132,7 +132,7 @@ class fish {
         if (distance < minDist){
           others[i] = null;
           sizemult += 0.05;
-          if (sizemult >=  2.5){
+          if (sizemult >=  2){
             sizemult = 1;
             for (int ii = 0; ii < fishes.length; ii++) {
                   if (fishes[ii] == null){fishes[ii] = fishes[ii] = new fish(x_pos,y_pos,155,ii,fish_food,mouth_fish,fish_pic, fishes);break;}
@@ -290,7 +290,7 @@ class food {
   float vy = 0;
   int id;
   food[] others;
-  float gravity = 0.03;
+  float gravity = 0.005;
   float friction = 0.1;
   boolean grabbed = false;
   color c;
@@ -375,7 +375,75 @@ class food {
     food_exsists = true;
     //fill(220, 170, 120);
     fill(c);
-    stroke(2);
+    //stroke(2);
     ellipse(x, y, diameter, diameter);
+  }
+}
+
+class instruct {
+
+  float x, y;
+  float diameter;
+  float vx = 0;
+  float vy = 0;
+  String msg;
+  instruct other;
+  float gravity = 0.0015;
+  float friction = 0.1;
+  boolean grabbed = false;
+  color c;
+
+  instruct(float xin, float yin, String instructions, color col) {
+    x = xin;
+    y = yin;
+    msg = instructions;
+    c = col;
+  } 
+
+  void collide() {
+    if (mousePressed) {
+      float dxs = mouseX - x-300;
+      float dys = mouseY - y;
+      float distances = sqrt(dxs*dxs + dys*dys);
+      float minDists = 1 + 150;
+      if (distances < minDists) {
+        grabbed = true;
+      }
+    }
+      }
+  void grabbed() {
+    if ((mousePressed) && (grabbed == true)) {
+      x = mouseX-300;
+      y = mouseY;
+    } 
+    
+    else {
+      grabbed = false;
+    }
+  }
+
+
+  void move() {
+    if (!grabbed){
+    vy += gravity;
+    x += vx;
+    y += vy;
+    }
+    
+    if (y - diameter/2 < -100) {
+      gravity = 0;
+    }
+  }
+
+  void display() {
+    textSize(50);
+    fill(c);
+    text(msg,x,y);
+  }
+  void update(){
+    collide();
+    grabbed();
+    move();
+    display();
   }
 }
