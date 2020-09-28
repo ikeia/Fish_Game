@@ -12,9 +12,9 @@ class fish {
   fish[] neighbors;
   
   boolean picked_up = false;
-  float s_ease = random(0.0005,0.01);
+  float s_ease = random(0.0005,0.009);
   float easing = s_ease;
-  float f_ease = random(0.005,0.02);
+  float f_ease = random(0.005,0.009);
 
   float im_width = random(170,200);
   float im_height = random(70,100);
@@ -79,7 +79,7 @@ class fish {
       float dx = others[i].x - x_pos;
       float dy = others[i].y - y_pos;
       float distance = sqrt(dx*dx + dy*dy);
-      float minDist = others[i].diameter/2 + diameter/2;
+      float minDist = others[i].diameter/2 + diameter*2;
       if (distance < minDist) { 
         following = true;
        }
@@ -116,6 +116,7 @@ class fish {
 
   //fish is following
   void follow() {
+    
     closest_food = null;
     closest_dist = 9999;
     
@@ -162,7 +163,7 @@ class fish {
      }
        
        
-        if (closest_food !=null){
+        if ((closest_food !=null) && (following)){
         easing = f_ease;
         targetX = closest_food.x;
         targetY = closest_food.y;
@@ -304,6 +305,25 @@ class food {
   } 
 
   void collide() {
+     for (int i = id + 1; i < numfood; i++) {
+      if (others[i] != null){
+      float dx = others[i].x - x;
+      float dy = others[i].y - y;
+      float distance = sqrt(dx*dx + dy*dy);
+      float minDist = others[i].diameter/2 + diameter/2;
+      if (distance < minDist) { 
+        float angle = atan2(dy, dx);
+        float targetX = x + cos(angle) * minDist;
+        float targetY = y + sin(angle) * minDist;
+        float ax = (targetX - others[i].x -1);
+        float ay = (targetY - others[i].y );
+        x -= ax;
+        y -= ay;
+        others[i].x += ax;
+        others[i].y += ay;
+      }
+     }
+    }   
     if (mousePressed) {
       float dxs = mouseX - x;
       float dys = mouseY - y;
