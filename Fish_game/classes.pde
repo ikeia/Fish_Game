@@ -77,7 +77,7 @@ class fish {
       float dx = others[i].x - x_pos;
       float dy = others[i].y - y_pos;
       float distance = sqrt(dx*dx + dy*dy);
-      float minDist = others[i].diameter/2 + diameter*2;
+      float minDist = others[i].diameter/2 + diameter/2;
       if (distance < minDist) { 
         following = true;
        }
@@ -129,6 +129,12 @@ class fish {
         if (distance < minDist){
           others[i] = null;
           sizemult += 0.05;
+          if (sizemult >=  2.5){
+            sizemult = 1;
+            for (int ii = 0; ii < fishes.length; ii++) {
+                  if (fishes[ii] == null){fishes[ii] = fishes[ii] = new fish(x_pos,y_pos,155,i,fish_food,mouth_fish,fish_pic, fishes);break;}
+      }
+          }
           //diameter *= sizemult;
           for (int f = 0; f < numfish; f++) {
             fishes[f].following = false; food_exsists = false;
@@ -219,8 +225,6 @@ class fish {
     else{
     image(swim, 0, 0, im_width*sizemult, im_height*sizemult);
     }
-    //fill(255,0,0);
-    //ellipse(0, 0, diameter, diameter);
     popMatrix();
   }
 }
@@ -284,13 +288,15 @@ class food {
   float gravity = 0.03;
   float friction = 0.1;
   boolean grabbed = false;
+  color c;
 
-  food(float xin, float yin, float din, int idin, food[] oin) {
+  food(float xin, float yin, float din, int idin, food[] oin, color col) {
     x = xin;
     y = yin;
     diameter = din;
     id = idin;
     others = oin;
+    c = col;
   } 
 
   void collide() {
@@ -303,33 +309,6 @@ class food {
         grabbed = true;
       }
     }
-
-
-    //float dxf = f1.x_pos - x;
-    //float dyf = f1.y_pos - y;
-    //float distances = sqrt(dxf*dxf + dyf*dyf);
-    //float minDists = diameter*2.5 + diameter/2;
-    //if (distances < minDists) {
-    //  food_exsists = false;
-    //  f1.following = false;
-      //}
-  //  for (int i = id + 1; i < fish_food.length; i++) {
-  //    float dx = others[i].x - x;
-  //    float dy = others[i].y - y;
-  //    float distance = sqrt(dx*dx + dy*dy);
-  //    float minDist = others[i].diameter/2 + diameter/2;
-  //    if (distance < minDist) { 
-  //      float angle = atan2(dy, dx);
-  //      float targetX = x + cos(angle) * minDist;
-  //      float targetY = y + sin(angle) * minDist;
-  //      float ax = (targetX - others[i].x);
-  //      float ay = (targetY - others[i].y);
-  //      vx -= ax;
-  //      vy -= ay;
-  //      others[i].vx += ax;
-  //      others[i].vy += ay;
-  //    }
-  //  }
       }
   void grabbed() {
     if ((mousePressed) && (grabbed == true)) {
@@ -370,7 +349,8 @@ class food {
 
   void display() {
     food_exsists = true;
-    fill(220, 170, 120);
+    //fill(220, 170, 120);
+    fill(c);
     stroke(2);
     ellipse(x, y, diameter, diameter);
   }

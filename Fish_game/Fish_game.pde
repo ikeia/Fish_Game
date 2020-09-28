@@ -9,6 +9,8 @@ PImage mouth_fish;
 PImage open;
 PImage closed;
 
+color c = color(random(0,255),random(0,255),random(0,150));
+
 boolean hand_open = true;
 
 int numfood = 100;

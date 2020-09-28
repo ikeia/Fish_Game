@@ -142,6 +142,7 @@ JSONObject sendMessage = new JSONObject();
 String messageKey1 = "x";
 String messageKey2 = "y";
 String messageKey3 = "food";
+String messageKey4 = "color";
 
 
 
@@ -218,10 +219,11 @@ SubscribeCallback readIncoming = new SubscribeCallback()
   int xCoordinate =  thisMessage.getMessage().getAsJsonObject().get(messageKey1).getAsInt();
   int yCoordinate =  thisMessage.getMessage().getAsJsonObject().get(messageKey2).getAsInt();
   boolean food = thisMessage.getMessage().getAsJsonObject().get(messageKey3).getAsBoolean();
+  color co = thisMessage.getMessage().getAsJsonObject().get(messageKey4).getAsInt();
   //print(food);
   if (food){
    for (int i = 0; i < fish_food.length; i++) {
-    if (fish_food[i] == null){fish_food[i] = new food(xCoordinate, yCoordinate, 40, i, fish_food);allReceivedMessages.clear();break;}
+    if (fish_food[i] == null){fish_food[i] = new food(xCoordinate, yCoordinate, 40, i, fish_food,co);allReceivedMessages.clear();break;}
       }
   }
   
@@ -250,6 +252,7 @@ void sendMessage()
  pnMessage.addProperty(messageKey1, mouseX);
  pnMessage.addProperty(messageKey2, mouseY);
  pnMessage.addProperty(messageKey3, keyPressed);
+ pnMessage.addProperty(messageKey4, c);
  
  pubnub.publish()                                  //publish the message
     .message(pnMessage)
@@ -261,9 +264,9 @@ void sendMessage()
             // status.isError() to see if error happened
             if(!status.isError()) 
             {
-             println("pub timetoken: " + result.getTimetoken());
+             //println("pub timetoken: " + result.getTimetoken());
             }
-            println("pub status code: " + status.getStatusCode());
+            //println("pub status code: " + status.getStatusCode());
         }
     });
   
