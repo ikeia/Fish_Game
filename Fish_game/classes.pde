@@ -407,7 +407,7 @@ class instruct {
       float dxs = mouseX - x-300;
       float dys = mouseY - y;
       float distances = sqrt(dxs*dxs + dys*dys);
-      float minDists = 1 + 150;
+      float minDists = 1 + 50;
       if (distances < minDists) {
         grabbed = true;
       }
