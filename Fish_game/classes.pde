@@ -130,10 +130,12 @@ class fish {
         float minDist = others[i].diameter/2 + diameter/2.5;
          
         if (distance < minDist){
+          fish_fed += 1;
           others[i] = null;
           sizemult += 0.05;
           if (sizemult >=  2){
             sizemult = 1;
+            numfish += 1;
             for (int ii = 0; ii < fishes.length; ii++) {
                   if (fishes[ii] == null){fishes[ii] = fishes[ii] = new fish(x_pos,y_pos,155,ii,fish_food,mouth_fish,fish_pic, fishes);break;}
                   }

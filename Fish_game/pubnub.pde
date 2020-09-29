@@ -222,6 +222,7 @@ SubscribeCallback readIncoming = new SubscribeCallback()
   color co = thisMessage.getMessage().getAsJsonObject().get(messageKey4).getAsInt();
   //print(food);
   if (food){
+    food_added += 1;
    for (int i = 0; i < fish_food.length; i++) {
     if (fish_food[i] == null){fish_food[i] = new food(xCoordinate, yCoordinate, 40, i, fish_food,co);allReceivedMessages.clear();break;}
       }

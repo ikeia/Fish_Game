@@ -13,9 +13,14 @@ color c = color(random(0,255),random(0,255),random(0,150));
 
 boolean hand_open = true;
 
-int numfood = 100;
+int numfood = 200;
 
-int numfish = 60;
+int numfish = 10;
+
+int food_added = 0;
+
+int fish_fed = 0;
+
 
 boolean food_exsists = false;
 
@@ -28,7 +33,7 @@ instruct t2;
 food[] fish_food = new food[numfood];
 Ball[] balls = new Ball[balls_back];
 Ball[] balls2 = new Ball[balls_front];
-fish[] fishes = new fish[numfish];
+fish[] fishes = new fish[200];
 fish f1;
 //fish_1 = loadImage("1_3.png");
 
@@ -140,7 +145,19 @@ void draw(){
     ball.move();
     ball.display();
   }
+  //int numfish = 10;
+
+  //int food_added = 0;
   
+  //int fish_fed = 0;
+
+  //int food_produced = 0;
+  textSize(35);
+  fill(0,0,0,150);
+  text("Fish: " + str(numfish), 50, 100);
+  text("Food Produced: " + str(food_added),250,100);
+  text("Fish Fed: " + str(fish_fed),600,100);
+
   
 }
 
